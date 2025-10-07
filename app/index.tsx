@@ -3,14 +3,14 @@ import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Image, StyleSheet, View } from "react-native";
 
-const router = useRouter();
-useEffect(() => {
-  setTimeout(() => {
-    router.push("/(auth)/welcome");
-  }, 2000);
-}, []);
-
 const index = () => {
+  const router = useRouter();
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      router.push("/(auth)/welcome");
+    }, 2000);
+    return () => clearTimeout(timeout);
+  }, [router]);
   return (
     <View style={styles.container}>
       <Image
